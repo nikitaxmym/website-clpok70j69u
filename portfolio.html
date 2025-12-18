@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Clinton Oh | Empowering Business Leaders Through Strategic Innovation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(30, 64, 175, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e40af;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: #f59e0b;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #64748b;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a.active {
+            color: #1e40af;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #f59e0b;
+        }
+
+        .nav-links a:hover {
+            color: #1e40af;
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: #1e40af;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        main {
+            margin-top: 80px;
+            padding: 3rem 0;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(245, 158, 11, 0.05) 100%);
+            margin-bottom: 4rem;
+            border-radius: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #1e40af;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 2px solid #64748b;
+            color: #64748b;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: #1e40af;
+            border-color: #1e40af;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(30, 64, 175, 0.3);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .portfolio-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(30, 64, 175, 0.2);
+        }
+
+        .portfolio-image {
+            height: 250px;
+            background: linear-gradient(135deg, #1e40af, #f59e0b);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(30, 64, 175, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-card:hover .portfolio-image::before {
+            background: rgba(30, 64, 175, 0.3);
+        }
+
+        .portfolio-content {
+            padding: 2rem;
+        }
+
+        .portfolio-category {
+            display: inline-block;
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-description {
+            color: #64748b;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-tag {
+            background: rgba(100, 116, 139, 0.1);
+            color: #64748b;
+            padding: 0.2rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .portfolio-link {
+            display: inline-flex;
+            align-items: center;
+            color: #1e40af;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-link:hover {
+            color: #f59e0b;
+            transform: translateX(5px);
+        }
+
+        .testimonials {
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(245, 158, 11, 0.05) 100%);
+            padding: 4rem 0;
+            margin: 4rem 0;
+            border-radius: 20px;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            color: #1e40af;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(30, 64, 175, 0.15);
+        }
+
+        .testimonial-quote {
+            font-style: italic;
+            color: #64748b;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1e40af, #f59e0b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .author-info h4 {
+            color: #1e40af;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #1e40af, #f59e0b);
+            border-radius: 20px;
+            color: white;
+            margin: 3rem 0;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #1e40af;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background: #f8fafc;
+        }
+
+        footer {
+            background: #1f2937;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #f59e0b;
+            transform: translateY(-3px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-filters {
+                justify-content: center;
+            }
+
+            .filter-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .testimonials h2,
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">Clinton Oh</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="portfolio.html" class="active">Portfolio</a></li>
+                <li><a href="insights.html">Insights</a></li>
+                <li><a href="speaking.html">Speaking</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero container">
+            <h1>Portfolio</h1>
+            <p>Discover how strategic innovation has transformed businesses and empowered leaders across diverse industries.</p>
+        </section>
+
+        <section class="container">
+            <div class="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="consulting">Consulting</button>
+                <button class="filter-btn" data-filter="transformation">Digital Transformation</button>
+                <button class="filter-btn" data-filter="strategy">Strategy</button>
+                <button class="filter-btn" data-filter="leadership">Leadership</button>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-card" data-category="transformation consulting">
+                    <div class="portfolio-image"></div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-category">Digital Transformation</span>
+                        <h3 class="portfolio-title">Fortune 500 Retail Modernization</h3>
+                        <p class="portfolio-description">Led comprehensive digital transformation initiative for major retail chain, resulting in 40% increase in operational efficiency and $50M annual cost savings.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Digital Strategy</span>
+                            <span class="portfolio-tag">Process Optimization</span>
+                            <span class="portfolio-tag">Change Management</span>
+                        </div>
+                        <a href="#" class="portfolio-link">View Case Study →</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-card" data-category="strategy leadership">
+                    <div class="portfolio-image"></div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-category">Strategic Planning</span>
+                        <h3 class="portfolio-title">Healthcare Innovation Program</h3>
+                        <p class="portfolio-description">Developed and implemented 5-year strategic innovation roadmap for regional healthcare network, driving patient satisfaction scores up by 35%.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Strategic Planning</span>
+                            <span class="portfolio-tag">Innovation</span>
+                            <span class="portfolio-tag">Healthcare</span>
+                        </div>
+                        <a href="#" class="portfolio-link">View Case Study →</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-card" data-category="consulting leadership">
+                    <div class="portfolio-image"></div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-category">Leadership Development</span>
+                        <h3 class="portfolio-title">Executive Leadership Transformation</h3>
+                        <p class="portfolio-description">Designed and facilitated leadership development program for C-suite executives at technology startup, supporting 300% revenue growth.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Executive Coaching</span>
+                            <span class="portfolio-tag">Leadership</span>
+                            <span class="portfolio-tag">Growth Strategy</span>
+                        </div>
+                        <a href="#" class="portfolio-link">View Case Study →</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-card" data-category="transformation strategy">
+                    <div class="portfolio-image"></div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-category">Organizational Change</span>
+                        <h3 class="portfolio-title">Manufacturing Excellence Initiative</h3>
+                        <p class="portfolio-description">Orchestrated complete operational overhaul for manufacturing company, achieving 25% productivity improvement and industry-leading safety standards.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Operational Excellence</span>
+                            <span class="portfolio-tag">Lean Manufacturing</span>
+                            <span class="portfolio-tag">Safety</span>
+                        </div>
+                        <a href="#" class="portfolio-link">View Case Study →</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-card" data-category="consulting strategy">
+                    <div class="portfolio-image"></div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-category">Market Expansion</span>
+                        <h3 class="portfolio-title">Global Market Entry Strategy</h3>
+                        <p class="portfolio-description">Developed comprehensive market entry strategy for fintech startup expanding into Asian markets, resulting in successful launch across 5 countries.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Market Analysis</span>
+                            <span class="portfolio-tag">International Business</span>
+                            <span class="portfolio-tag">Fintech</span>
+                        </div>
+                        <a href="#" class="portfolio-link">View Case Study →</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-card" data-category="transformation leadership">
+                    <div class="portfolio-image"></div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-category">Cultural Transformation</span>
+                        <h3 class="portfolio-title">Organizational Culture Redesign</h3>
+                        <p class="portfolio-description">Led cultural transformation initiative for traditional financial services firm, improving employee engagement by 60% and reducing turnover by 45%.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Culture Change</span>
+                            <span class="portfolio-tag">Employee Engagement</span>
+                            <span class="portfolio-tag">Financial Services</span>
+                        </div>
+                        <a href="#" class="portfolio-link">View Case Study →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <div class="container">
+                <h2>Client Success Stories</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial">
+                        <p class="testimonial-quote">"Clinton's strategic vision and innovative approach transformed our entire business model. His ability to see beyond current limitations and chart a path to exponential growth is truly remarkable."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">MJ</div>
+                            <div class="author-info">
+                                <h4>Michael Johnson</h4>
+                                <p>CEO, TechVision Solutions</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <p class="testimonial-quote">"Working with Clinton was a game-changer for our leadership team. His insights on strategic innovation helped us navigate complex market challenges and emerge stronger than ever."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">SR</div>
+                            <div class="author-info">
+                                <h4>Sarah Rodriguez</h4>
+                                <p>COO, Global Manufacturing Corp</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <p class="testimonial-quote">"Clinton's expertise in digital transformation was instrumental in our company's successful modernization. His strategic guidance delivered results that exceeded our expectations."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">DL</div>
+                            <div class="author-info">
+                                <h4>David Lee</h4>
+                                <p>President, Retail Innovations Inc</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section container">
+            <h2>Ready to Transform Your Business?</h2>
+            <p>Let's discuss how strategic innovation can drive your organization's success.</p>
+            <a href="contact.html" class="cta-button">Start Your Journey</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Clinton Oh. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#">LinkedIn</a>
+                <a href="#">Twitter</a>
+                <a href="#">Medium</a>
+            </div>
+            <p>Empowering Business Leaders Through Strategic Innovation</p>
+        </div>
+    </footer>
+
+    <script>
+        // Portfolio Filter Functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioCards = document.querySelectorAll('.portfolio-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                const filterValue = button.getAttribute('data-filter');
+
+                portfolioCards.forEach(card => {
+                    if (filterValue === 'all') {
+                        card.style.display = 'block';
+                        card.style.animation = 'fadeInUp 0.6s ease-out';
+                    } else {
+                        const cardCategory = card.getAttribute('data-category');
+                        if (cardCategory && cardCategory.includes(filterValue)) {
+                            card.style.display = 'block';
+                            card.style.animation = 'fadeInUp 0.6s ease-out';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease-out';
+                }
+            });
+        }, observerOptions);
+
+        // Observe portfolio cards
+        portfolioCards.forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
